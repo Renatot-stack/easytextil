@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Easy Têxtil</title>
+    <title>Easy Têxtil - Produtos</title>
 
     <style>
         * {
@@ -22,162 +22,105 @@
         }
 
         header {
-            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
         h1 {
-            margin-bottom: 5px;
-        }
-
-        h2,
-        h3 {
-            margin-top: 0;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-
-        .modelo {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 30px;
-            align-items: start;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #bbb;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        .imagem-area {
-            text-align: center;
-        }
-
-        #area {
-            width: 100%;
-            height: 250px;
-            border: 2px dashed #999;
-            border-radius: 10px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            cursor: pointer;
-            background: #fafafa;
-            color: #666;
-
-            overflow: hidden;
-        }
-
-        #area:hover {
-            background: #f0f0f0;
-        }
-
-        #preview {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .tamanhos {
-            margin-top: 20px;
-        }
-
-        .options {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .options label {
             margin: 0;
-            cursor: pointer;
-        }
-
-        .options input {
-            display: none;
-        }
-
-        .options span {
-            display: block;
-            padding: 10px 18px;
-            border: 1px solid #aaa;
-            border-radius: 6px;
-            background: white;
-        }
-
-        .options input:checked + span {
-            background: #222;
-            color: white;
-            border-color: #222;
-        }
-
-        .custos {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .campo {
-            margin-bottom: 5px;
         }
 
         button {
             border: none;
             border-radius: 7px;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 11px 16px;
+            font-size: 15px;
             cursor: pointer;
         }
 
-        #calcular {
+        .novo {
             background: #222;
             color: white;
-            width: 100%;
         }
 
-        #calcular:hover {
+        .novo:hover {
             background: #444;
         }
 
-        #resultado {
-            background: #f0f0f0;
-            border-radius: 8px;
-            padding: 20px;
-            line-height: 1.6;
+        .acoes {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
         }
 
-        .valor-final {
-            font-size: 24px;
+        .acoes button {
+            background: white;
+            border: 1px solid #bbb;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .produto {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .produto:hover {
+            transform: translateY(-2px);
+            border-color: #888;
+        }
+
+        .produto h2 {
+            margin-top: 0;
+        }
+
+        .tamanhos {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .preco {
+            font-size: 20px;
             font-weight: bold;
         }
 
-        @media (max-width: 700px) {
+        .vazio {
+            background: white;
+            border: 1px dashed #aaa;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        @media (max-width: 800px) {
+            .produtos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
             body {
                 padding: 15px;
             }
 
-            .modelo {
-                grid-template-columns: 1fr;
+            header {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            .custos {
+            .produtos {
                 grid-template-columns: 1fr;
             }
         }
@@ -187,339 +130,239 @@
 <body>
 
     <header>
-        <h1>Easy Têxtil</h1>
-        <h2>Calculadora de custo por peça</h2>
+        <div>
+            <h1>Easy Têxtil</h1>
+            <p>Produtos cadastrados</p>
+        </div>
 
-        <p>
-            Informe os custos da produção para descobrir
-            o valor mínimo de venda de cada peça.
-        </p>
+        <button class="novo" onclick="novoProduto()">
+            + Novo produto
+        </button>
     </header>
 
 
-    <!-- MODELO DA PEÇA -->
-    <section class="card">
+    <div class="acoes">
 
-        <h2>Informações do modelo</h2>
-
-        <div class="modelo">
-
-            <div>
-                <label for="nome">Nome da peça:</label>
-
-                <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Ex.: Camisa básica"
-                >
-
-                <div class="tamanhos">
-
-                    <h3>Tamanhos da peça</h3>
-
-                    <div class="options">
-
-                        <label>
-                            <input type="checkbox" value="P">
-                            <span>P</span>
-                        </label>
-
-                        <label>
-                            <input type="checkbox" value="M">
-                            <span>M</span>
-                        </label>
-
-                        <label>
-                            <input type="checkbox" value="G">
-                            <span>G</span>
-                        </label>
-
-                        <label>
-                            <input type="checkbox" value="GG">
-                            <span>GG</span>
-                        </label>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- IMAGEM -->
-            <div class="imagem-area">
-
-                <div id="area">
-                    <span>Arraste uma imagem aqui<br>ou clique para escolher</span>
-                </div>
-
-                <input
-                    type="file"
-                    id="inputImagem"
-                    accept="image/*"
-                    hidden
-                >
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- PRODUÇÃO -->
-    <section class="card">
-
-        <h2>Produção</h2>
-
-        <label for="quantidade">
-            Quantidade de peças produzidas:
-        </label>
-
-        <input
-            type="number"
-            id="quantidade"
-            min="1"
-            step="1"
-            placeholder="Ex.: 100"
-        >
-
-    </section>
-
-
-    <!-- CUSTOS -->
-    <section class="card">
-
-        <h2>Custos da produção</h2>
-
-        <div class="custos">
-
-            <div class="campo">
-                <label for="tecido">Tecido (R$)</label>
-                <input type="number" id="tecido" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="aviamentos">Aviamentos (R$)</label>
-                <input type="number" id="aviamentos" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="salarios">Salários dos funcionários (R$)</label>
-                <input type="number" id="salarios" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="energia">Conta de luz (R$)</label>
-                <input type="number" id="energia" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="agua">Conta de água (R$)</label>
-                <input type="number" id="agua" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="aluguel">Aluguel (R$)</label>
-                <input type="number" id="aluguel" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="manutencao">Manutenção de máquinas (R$)</label>
-                <input type="number" id="manutencao" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="embalagens">Embalagens (R$)</label>
-                <input type="number" id="embalagens" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="transporte">Transporte / frete (R$)</label>
-                <input type="number" id="transporte" min="0" step="0.01">
-            </div>
-
-            <div class="campo">
-                <label for="outros">Outros custos (R$)</label>
-                <input type="number" id="outros" min="0" step="0.01">
-            </div>
-
-        </div>
-
-        <br>
-
-        <button id="calcular">
-            Calcular custo da peça
+        <button onclick="exportarJSON()">
+            Exportar JSON
         </button>
 
-    </section>
+        <button onclick="document.getElementById('arquivoJSON').click()">
+            Importar JSON
+        </button>
+
+        <input
+            type="file"
+            id="arquivoJSON"
+            accept=".json"
+            hidden
+        >
+
+    </div>
 
 
-    <!-- RESULTADO -->
-    <section class="card">
-
-        <h2>Resultado</h2>
-
-        <div id="resultado">
-            Preencha os valores e clique em calcular.
-        </div>
-
-    </section>
+    <main id="listaProdutos"></main>
 
 
     <script>
 
-        /* =========================
-           IMAGEM
-        ========================= */
-
-        const area = document.getElementById("area");
-        const inputImagem = document.getElementById("inputImagem");
-
-        area.addEventListener("click", () => {
-            inputImagem.click();
-        });
+        const CHAVE = "easyTextilProdutos";
 
 
-        function mostrarImagem(arquivo) {
+        function obterProdutos() {
 
-            if (!arquivo || !arquivo.type.startsWith("image/")) {
-                return;
-            }
-
-            const url = URL.createObjectURL(arquivo);
-
-            area.innerHTML = "";
-
-            const imagem = document.createElement("img");
-
-            imagem.id = "preview";
-            imagem.src = url;
-            imagem.alt = "Imagem da peça";
-
-            area.appendChild(imagem);
-        }
-
-
-        inputImagem.addEventListener("change", () => {
-
-            mostrarImagem(inputImagem.files[0]);
-
-        });
-
-
-        area.addEventListener("dragover", (event) => {
-
-            event.preventDefault();
-
-        });
-
-
-        area.addEventListener("drop", (event) => {
-
-            event.preventDefault();
-
-            const arquivo = event.dataTransfer.files[0];
-
-            mostrarImagem(arquivo);
-
-        });
-
-
-        /* =========================
-           CALCULADORA
-        ========================= */
-
-        function valor(id) {
-
-            return Number(
-                document.getElementById(id).value
-            ) || 0;
+            return JSON.parse(
+                localStorage.getItem(CHAVE)
+            ) || [];
 
         }
 
 
-        function calcular() {
+        function salvarProdutos(produtos) {
 
-            const quantidade = valor("quantidade");
+            localStorage.setItem(
+                CHAVE,
+                JSON.stringify(produtos)
+            );
 
-            const resultado =
-                document.getElementById("resultado");
+        }
 
 
-            if (quantidade <= 0) {
+        function novoProduto() {
 
-                resultado.innerHTML =
-                    "Informe uma quantidade de peças válida.";
+            window.location.href = "produto.html";
+
+        }
+
+
+        function editarProduto(id) {
+
+            window.location.href =
+                `produto.html?id=${id}`;
+
+        }
+
+
+        function formatarMoeda(valor) {
+
+            return Number(valor).toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+        }
+
+
+        function carregarProdutos() {
+
+            const produtos = obterProdutos();
+
+            const lista =
+                document.getElementById("listaProdutos");
+
+
+            if (produtos.length === 0) {
+
+                lista.innerHTML = `
+                    <div class="vazio">
+                        <h2>Nenhum produto cadastrado</h2>
+
+                        <p>
+                            Clique em "Novo produto"
+                            para cadastrar a primeira peça.
+                        </p>
+                    </div>
+                `;
 
                 return;
-
             }
 
 
-            const custos = {
+            lista.innerHTML = `
+                <div class="produtos">
 
-                tecido: valor("tecido"),
-                aviamentos: valor("aviamentos"),
-                salarios: valor("salarios"),
-                energia: valor("energia"),
-                agua: valor("agua"),
-                aluguel: valor("aluguel"),
-                manutencao: valor("manutencao"),
-                embalagens: valor("embalagens"),
-                transporte: valor("transporte"),
-                outros: valor("outros")
+                    ${produtos.map(produto => `
 
-            };
+                        <article
+                            class="produto"
+                            onclick="editarProduto('${produto.id}')"
+                        >
 
+                            <h2>
+                                ${produto.nome || "Produto sem nome"}
+                            </h2>
 
-            const custoTotal =
-                Object.values(custos).reduce(
-                    (total, custo) => total + custo,
-                    0
-                );
+                            <div class="tamanhos">
+                                Tamanhos:
+                                ${
+                                    produto.tamanhos?.length
+                                    ? produto.tamanhos.join(", ")
+                                    : "Nenhum"
+                                }
+                            </div>
 
+                            <p>
+                                Produção:
+                                ${produto.quantidade} peças
+                            </p>
 
-            const custoPorPeca =
-                custoTotal / quantidade;
+                            <div class="preco">
+                                ${formatarMoeda(produto.custoPorPeca)}
+                                / peça
+                            </div>
 
+                        </article>
 
-            const nome =
-                document.getElementById("nome").value
-                || "Peça sem nome";
+                    `).join("")}
 
-
-            resultado.innerHTML = `
-
-                <strong>Peça:</strong>
-                ${nome}
-
-                <br>
-
-                <strong>Quantidade:</strong>
-                ${quantidade} peças
-
-                <br><br>
-
-                <strong>Custo total da produção:</strong>
-                R$ ${custoTotal.toFixed(2)}
-
-                <br><br>
-
-                <div class="valor-final">
-                    VALOR MÍNIMO POR PEÇA:
-                    R$ ${custoPorPeca.toFixed(2)}
                 </div>
-
             `;
 
         }
 
 
+        function exportarJSON() {
+
+            const produtos = obterProdutos();
+
+            const dados =
+                JSON.stringify(produtos, null, 4);
+
+            const arquivo =
+                new Blob(
+                    [dados],
+                    { type: "application/json" }
+                );
+
+            const url =
+                URL.createObjectURL(arquivo);
+
+            const link =
+                document.createElement("a");
+
+            link.href = url;
+            link.download = "easy-textil-produtos.json";
+
+            link.click();
+
+            URL.revokeObjectURL(url);
+
+        }
+
+
         document
-            .getElementById("calcular")
-            .addEventListener("click", calcular);
+            .getElementById("arquivoJSON")
+            .addEventListener("change", function () {
+
+                const arquivo = this.files[0];
+
+                if (!arquivo) return;
+
+
+                const leitor = new FileReader();
+
+
+                leitor.onload = function (event) {
+
+                    try {
+
+                        const produtos =
+                            JSON.parse(event.target.result);
+
+
+                        if (!Array.isArray(produtos)) {
+                            throw new Error();
+                        }
+
+
+                        salvarProdutos(produtos);
+
+                        carregarProdutos();
+
+                        alert(
+                            "Produtos importados com sucesso!"
+                        );
+
+                    } catch {
+
+                        alert(
+                            "O arquivo JSON não é válido."
+                        );
+
+                    }
+
+                };
+
+
+                leitor.readAsText(arquivo);
+
+            });
+
+
+        carregarProdutos();
 
     </script>
 
