@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Easy Têxtil</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        h2,
+        h3 {
+            margin-top: 0;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .modelo {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .imagem-area {
+            text-align: center;
+        }
+
+        #area {
+            width: 100%;
+            height: 250px;
+            border: 2px dashed #999;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+            background: #fafafa;
+            color: #666;
+
+            overflow: hidden;
+        }
+
+        #area:hover {
+            background: #f0f0f0;
+        }
+
+        #preview {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .tamanhos {
+            margin-top: 20px;
+        }
+
+        .options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .options label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .options input {
+            display: none;
+        }
+
+        .options span {
+            display: block;
+            padding: 10px 18px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .options input:checked + span {
+            background: #222;
+            color: white;
+            border-color: #222;
+        }
+
+        .custos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .campo {
+            margin-bottom: 5px;
+        }
+
+        button {
+            border: none;
+            border-radius: 7px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #calcular {
+            background: #222;
+            color: white;
+            width: 100%;
+        }
+
+        #calcular:hover {
+            background: #444;
+        }
+
+        #resultado {
+            background: #f0f0f0;
+            border-radius: 8px;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .valor-final {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+
+            .modelo {
+                grid-template-columns: 1fr;
+            }
+
+            .custos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Easy Têxtil</h1>
+        <h2>Calculadora de custo por peça</h2>
+
+        <p>
+            Informe os custos da produção para descobrir
+            o valor mínimo de venda de cada peça.
+        </p>
+    </header>
+
+
+    <!-- MODELO DA PEÇA -->
+    <section class="card">
+
+        <h2>Informações do modelo</h2>
+
+        <div class="modelo">
+
+            <div>
+                <label for="nome">Nome da peça:</label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Ex.: Camisa básica"
+                >
+
+                <div class="tamanhos">
+
+                    <h3>Tamanhos da peça</h3>
+
+                    <div class="options">
+
+                        <label>
+                            <input type="checkbox" value="P">
+                            <span>P</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" value="M">
+                            <span>M</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" value="G">
+                            <span>G</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" value="GG">
+                            <span>GG</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- IMAGEM -->
+            <div class="imagem-area">
+
+                <div id="area">
+                    <span>Arraste uma imagem aqui<br>ou clique para escolher</span>
+                </div>
+
+                <input
+                    type="file"
+                    id="inputImagem"
+                    accept="image/*"
+                    hidden
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUÇÃO -->
+    <section class="card">
+
+        <h2>Produção</h2>
+
+        <label for="quantidade">
+            Quantidade de peças produzidas:
+        </label>
+
+        <input
+            type="number"
+            id="quantidade"
+            min="1"
+            step="1"
+            placeholder="Ex.: 100"
+        >
+
+    </section>
+
+
+    <!-- CUSTOS -->
+    <section class="card">
+
+        <h2>Custos da produção</h2>
+
+        <div class="custos">
+
+            <div class="campo">
+                <label for="tecido">Tecido (R$)</label>
+                <input type="number" id="tecido" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="aviamentos">Aviamentos (R$)</label>
+                <input type="number" id="aviamentos" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="salarios">Salários dos funcionários (R$)</label>
+                <input type="number" id="salarios" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="energia">Conta de luz (R$)</label>
+                <input type="number" id="energia" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="agua">Conta de água (R$)</label>
+                <input type="number" id="agua" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="aluguel">Aluguel (R$)</label>
+                <input type="number" id="aluguel" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="manutencao">Manutenção de máquinas (R$)</label>
+                <input type="number" id="manutencao" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="embalagens">Embalagens (R$)</label>
+                <input type="number" id="embalagens" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="transporte">Transporte / frete (R$)</label>
+                <input type="number" id="transporte" min="0" step="0.01">
+            </div>
+
+            <div class="campo">
+                <label for="outros">Outros custos (R$)</label>
+                <input type="number" id="outros" min="0" step="0.01">
+            </div>
+
+        </div>
+
+        <br>
+
+        <button id="calcular">
+            Calcular custo da peça
+        </button>
+
+    </section>
+
+
+    <!-- RESULTADO -->
+    <section class="card">
+
+        <h2>Resultado</h2>
+
+        <div id="resultado">
+            Preencha os valores e clique em calcular.
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /* =========================
+           IMAGEM
+        ========================= */
+
+        const area = document.getElementById("area");
+        const inputImagem = document.getElementById("inputImagem");
+
+        area.addEventListener("click", () => {
+            inputImagem.click();
+        });
+
+
+        function mostrarImagem(arquivo) {
+
+            if (!arquivo || !arquivo.type.startsWith("image/")) {
+                return;
+            }
+
+            const url = URL.createObjectURL(arquivo);
+
+            area.innerHTML = "";
+
+            const imagem = document.createElement("img");
+
+            imagem.id = "preview";
+            imagem.src = url;
+            imagem.alt = "Imagem da peça";
+
+            area.appendChild(imagem);
+        }
+
+
+        inputImagem.addEventListener("change", () => {
+
+            mostrarImagem(inputImagem.files[0]);
+
+        });
+
+
+        area.addEventListener("dragover", (event) => {
+
+            event.preventDefault();
+
+        });
+
+
+        area.addEventListener("drop", (event) => {
+
+            event.preventDefault();
+
+            const arquivo = event.dataTransfer.files[0];
+
+            mostrarImagem(arquivo);
+
+        });
+
+
+        /* =========================
+           CALCULADORA
+        ========================= */
+
+        function valor(id) {
+
+            return Number(
+                document.getElementById(id).value
+            ) || 0;
+
+        }
+
+
+        function calcular() {
+
+            const quantidade = valor("quantidade");
+
+            const resultado =
+                document.getElementById("resultado");
+
+
+            if (quantidade <= 0) {
+
+                resultado.innerHTML =
+                    "Informe uma quantidade de peças válida.";
+
+                return;
+
+            }
+
+
+            const custos = {
+
+                tecido: valor("tecido"),
+                aviamentos: valor("aviamentos"),
+                salarios: valor("salarios"),
+                energia: valor("energia"),
+                agua: valor("agua"),
+                aluguel: valor("aluguel"),
+                manutencao: valor("manutencao"),
+                embalagens: valor("embalagens"),
+                transporte: valor("transporte"),
+                outros: valor("outros")
+
+            };
+
+
+            const custoTotal =
+                Object.values(custos).reduce(
+                    (total, custo) => total + custo,
+                    0
+                );
+
+
+            const custoPorPeca =
+                custoTotal / quantidade;
+
+
+            const nome =
+                document.getElementById("nome").value
+                || "Peça sem nome";
+
+
+            resultado.innerHTML = `
+
+                <strong>Peça:</strong>
+                ${nome}
+
+                <br>
+
+                <strong>Quantidade:</strong>
+                ${quantidade} peças
+
+                <br><br>
+
+                <strong>Custo total da produção:</strong>
+                R$ ${custoTotal.toFixed(2)}
+
+                <br><br>
+
+                <div class="valor-final">
+                    VALOR MÍNIMO POR PEÇA:
+                    R$ ${custoPorPeca.toFixed(2)}
+                </div>
+
+            `;
+
+        }
+
+
+        document
+            .getElementById("calcular")
+            .addEventListener("click", calcular);
+
+    </script>
+
+</body>
+
+</html>
