@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Easy Têxtil — Facções</title><link rel="stylesheet" href="css/style.css"></head>
+<body><header class="topbar"><div><strong>Easy Têxtil</strong><span>Facções</span></div><nav><a href="dashboard.html">Painel</a><a href="index.html">Produtos</a></nav></header>
+<main class="container"><div class="page-head"><div><h1>Facções de costura</h1><p>Cadastre o nome e o valor total pago à facção no lote.</p></div></div>
+<section class="card"><form id="faccaoForm" class="inline-form"><label>Nome da facção<input id="faccaoNome" required placeholder="Ex.: Facção Maria"></label><label>Salário total do lote (R$)<input id="faccaoSalario" type="number" min="0" step=".01" required></label><button class="button primary" type="submit">Cadastrar</button></form></section>
+<section id="listaFaccoes" class="list"></section></main><script src="js/app.js"></script><script src="js/faccoes.js"></script></body></html>

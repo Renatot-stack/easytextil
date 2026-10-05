@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Easy Têxtil — Cadastro</title><link rel="stylesheet" href="css/style.css"></head>
+<body class="auth-page">
+<main class="auth-card">
+  <div class="brand">Easy Têxtil</div>
+  <h1>Criar conta</h1><p class="muted">Cadastro local para a fase de testes.</p>
+  <form id="cadastro">
+    <label>Nome da empresa<input name="empresa" required></label>
+    <label>E-mail<input name="email" type="email" required></label>
+    <label>Senha<input name="senha" type="password" minlength="6" required></label>
+    <button class="button primary full" type="submit">Cadastrar</button>
+  </form>
+  <p>Já possui uma conta? <a href="login.html">Faça login.</a></p>
+  <p id="mensagem" class="message"></p>
+</main>
+<script src="js/app.js"></script><script src="js/cadastro.js"></script>
+</body></html>
