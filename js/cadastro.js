@@ -1,1 +1,19 @@
-const form=document.getElementById("cadastro");form?.addEventListener("submit",e=>{e.preventDefault();const empresa=form.empresa.value.trim(),email=form.email.value.trim().toLowerCase(),senha=form.senha.value;const msg=document.getElementById("mensagem");const db=getDB();if(db.users.some(u=>u.email===email)){msg.textContent="Este e-mail já está cadastrado.";msg.className="message danger";return}const u={id:uid(),empresa,email,senha};db.users.push(u);saveDB(db);localStorage.setItem(SESSION_KEY,u.id);location.href="dashboard.html"});
+const form = document.getElementById("cadastro");
+form?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const empresa = form.empresa.value.trim(),
+    email = form.email.value.trim().toLowerCase(),
+    senha = form.senha.value;
+  const msg = document.getElementById("mensagem");
+  const db = getDB();
+  if (db.users.some((u) => u.email === email)) {
+    msg.textContent = "Este e-mail já está cadastrado.";
+    msg.className = "message danger";
+    return;
+  }
+  const u = { id: uid(), empresa, email, senha };
+  db.users.push(u);
+  saveDB(db);
+  localStorage.setItem(SESSION_KEY, u.id);
+  location.href = "dashboard.html";
+});

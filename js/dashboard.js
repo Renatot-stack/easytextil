@@ -1,1 +1,14 @@
-const u=currentUser();document.getElementById("empresaTop").textContent=u?u.empresa:"";document.getElementById("boasVindas").textContent=u?`Olá, ${u.empresa}. Aqui está um resumo da sua instalação.`:"";document.getElementById("totalProdutos").textContent=userData(getDB().products).length;document.getElementById("totalFaccoes").textContent=userData(getDB().faccoes).length;document.getElementById("totalAcabamentos").textContent=userData(getDB().acabamentos).length;
+const u = currentUser();
+document.getElementById("empresaTop").textContent = u ? u.empresa : "";
+document.getElementById("boasVindas").textContent = u
+  ? `Olá, ${u.empresa}. Aqui está um resumo da sua instalação.`
+  : "";
+document.getElementById("totalProdutos").textContent = userData(
+  getDB().products,
+).length;
+document.getElementById("totalFaccoes").textContent = userData(
+  getDB().faccoes,
+).length;
+document.getElementById("totalAcabamentos").textContent = userData(
+  getDB().acabamentos,
+).length;

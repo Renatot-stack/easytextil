@@ -1,26 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Easy Têxtil — Produto</title><link rel="stylesheet" href="css/style.css"></head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Easy Têxtil — Produto</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
 <body>
-<header class="topbar"><div><strong>Easy Têxtil</strong><span>Calculadora</span></div><nav><a href="index.html">Produtos</a><a href="dashboard.html">Painel</a></nav></header>
-<main class="container">
-  <div class="page-head"><div><h1 id="titulo">Novo produto</h1><p>Calcule o custo mínimo por peça sem margem de lucro.</p></div><a class="button" href="index.html">← Produtos</a></div>
-  <form id="produtoForm">
-    <section class="card"><h2>Informações do modelo</h2>
-      <div class="two-col">
-        <div><label>Nome da peça<input id="nome" required placeholder="Ex.: Camisa básica"></label>
-          <label>Tipo de tamanho<select id="tipoTamanho"><option value="letras">Letras (PP, P, M, G, GG)</option><option value="numeros">Números</option><option value="idade">Idade</option></select></label>
-          <div id="opcoesTamanho" class="chips"></div>
+  <header class="topbar">
+    <div><strong>Easy Têxtil</strong><span>Calculadora</span></div>
+    <nav><a href="index.html">Produtos</a><a href="dashboard.html">Painel</a></nav>
+  </header>
+  <main class="container">
+    <div class="page-head">
+      <div>
+        <h1 id="titulo">Novo produto</h1>
+        <p>Calcule o custo mínimo por peça sem margem de lucro.</p>
+      </div><a class="button" href="index.html">← Produtos</a>
+    </div>
+    <form id="produtoForm">
+      <section class="card">
+        <h2>Informações do modelo</h2>
+        <div class="two-col">
+          <div><label>Nome da peça<input id="nome" required placeholder="Ex.: Camisa básica"></label>
+            <label>Tipo de tamanho<select id="tipoTamanho">
+                <option value="letras">Letras (PP, P, M, G, GG)</option>
+                <option value="numeros">Números</option>
+                <option value="idade">Idade</option>
+              </select></label>
+            <div id="opcoesTamanho" class="chips"></div>
+          </div>
+          <div><label>Imagem do modelo</label>
+            <div id="areaImagem" class="dropzone">Arraste uma imagem aqui<br>ou clique para escolher<input
+                id="inputImagem" type="file" accept="image/*" hidden></div><small>Imagem opcional. É armazenada
+              localmente no navegador.</small>
+          </div>
         </div>
-        <div><label>Imagem do modelo</label><div id="areaImagem" class="dropzone">Arraste uma imagem aqui<br>ou clique para escolher<input id="inputImagem" type="file" accept="image/*" hidden></div><small>Imagem opcional. É armazenada localmente no navegador.</small></div>
-      </div>
-    </section>
-    <section class="card"><h2>Produção</h2><label>Quantidade de peças produzidas<input id="quantidade" type="number" min="1" step="1" required placeholder="Ex.: 100"></label></section>
-    <section class="card"><h2>Custos da produção</h2><p class="muted">Informe o custo total deste lote. O resultado será dividido pela quantidade produzida.</p>
-      <div class="cost-grid" id="custos"></div>
-    </section>
-    <section class="card result-card"><h2>Resultado</h2><div id="resultado" class="result">Preencha os valores e clique em salvar.</div><div class="form-actions"><button class="button" type="button" onclick="history.back()">Cancelar</button><button class="button primary" type="submit">Salvar produto</button></div></section>
-  </form>
-</main>
-<script src="js/app.js"></script><script src="js/produto.js"></script>
-</body></html>
+      </section>
+      <section class="card">
+        <h2>Produção</h2><label>Quantidade de peças produzidas<input id="quantidade" type="number" min="1" step="1"
+            required placeholder="Ex.: 100"></label>
+      </section>
+      <section class="card">
+        <h2>Custos da produção</h2>
+        <p class="muted">Informe o custo total deste lote. O resultado será dividido pela quantidade produzida.</p>
+        <div class="cost-grid" id="custos"></div>
+      </section>
+      <section class="card result-card">
+        <h2>Resultado</h2>
+        <div id="resultado" class="result">Preencha os valores e clique em salvar.</div>
+        <div class="form-actions"><button class="button" type="button" onclick="history.back()">Cancelar</button><button
+            class="button primary" type="submit">Salvar produto</button></div>
+      </section>
+    </form>
+  </main>
+  <script src="js/app.js"></script>
+  <script src="js/produto.js"></script>
+</body>
+
+</html>

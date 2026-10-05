@@ -1,7 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Easy Têxtil — Acabamentos</title><link rel="stylesheet" href="css/style.css"></head>
-<body><header class="topbar"><div><strong>Easy Têxtil</strong><span>Acabamentos</span></div><nav><a href="dashboard.html">Painel</a><a href="index.html">Produtos</a></nav></header>
-<main class="container"><div class="page-head"><div><h1>Acabamentos</h1><p>Cadastre serviços de acabamento usados na produção.</p></div></div>
-<section class="card"><form id="acabamentoForm" class="inline-form"><label>Nome do acabamento<input id="acabamentoNome" required placeholder="Ex.: Bordado"></label><label>Custo do lote (R$)<input id="acabamentoCusto" type="number" min="0" step=".01" required></label><button class="button primary" type="submit">Cadastrar</button></form></section>
-<section id="listaAcabamentos" class="list"></section></main><script src="js/app.js"></script><script src="js/acabamentos.js"></script></body></html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Easy Têxtil — Acabamentos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div><strong>Easy Têxtil</strong><span>Acabamentos</span></div>
+        <nav><a href="dashboard.html">Painel</a><a href="index.html">Produtos</a></nav>
+    </header>
+    <main class="container">
+        <div class="page-head">
+            <div>
+                <h1>Acabamentos</h1>
+                <p>Cadastre serviços de acabamento usados na produção.</p>
+            </div>
+        </div>
+        <section class="card">
+            <form id="acabamentoForm" class="inline-form"><label>Nome do acabamento<input id="acabamentoNome" required
+                        placeholder="Ex.: Bordado"></label><label>Custo do lote (R$)<input id="acabamentoCusto"
+                        type="number" min="0" step=".01" required></label><button class="button primary"
+                    type="submit">Cadastrar</button></form>
+        </section>
+        <section id="listaAcabamentos" class="list"></section>
+    </main>
+    <script src="js/app.js"></script>
+    <script src="js/acabamentos.js"></script>
+</body>
+
+</html>
